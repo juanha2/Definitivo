@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL\include;D:\JuanScreen1\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL\libx86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\juanh\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanh\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanh\Desktop\JuanScreen1\SDL\include;C:\Users\juanh\Desktop\JuanScreen1\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\juanh\Desktop\JuanScreen1\SDL\libx86;C:\Users\juanh\Desktop\JuanScreen1\SDL_Mixer\libx86;C:\Users\juanh\Desktop\JuanScreen1\SDL_Image\libx86;C:\Users\juanh\Desktop\JuanScreen1\SDL\libx86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL\include;D:\JuanScreen1\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL\libx86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\juanh\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanh\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanh\Desktop\JuanScreen1\SDL\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL\include;D:\JuanScreen1\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\juanh\Desktop\JuanScreen1\SDL\libx86;C:\Users\juanh\Desktop\JuanScreen1\SDL_Mixer\libx86;C:\Users\juanh\Desktop\JuanScreen1\SDL_Image\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\libx86;C:\Users\juanha2\Desktop\JuanScreen1\SDL\libx86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\juanha2\Desktop\JuanScreen1\SDL_Mixer\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL_Image\include;C:\Users\juanha2\Desktop\JuanScreen1\SDL\include;C:\Users\juanha2\Desktop\JuanScreen\SDL\include;$(IncludePath)</IncludePath>

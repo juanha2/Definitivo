@@ -17,6 +17,7 @@ using namespace std;
 int main(int argc, char*argv[]) {
 
 	//Inicialización 
+
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
 	Mix_Init(MIX_INIT_OGG);	
@@ -24,20 +25,20 @@ int main(int argc, char*argv[]) {
 
 	//Creación ventana
 
-	SDL_Window *window; //Declaramos puntero window
+	SDL_Window *window; 
 
 	window = SDL_CreateWindow(
 		"Cuadrado rojo", //Titulo Ventana
 		SDL_WINDOWPOS_CENTERED, // Posicion inicial x (centrado)
 		SDL_WINDOWPOS_CENTERED, // Posicion inicial y (centrado)
-		640, // Anchura de imagen
-		480, // Altura de imagen
-		SDL_WINDOW_FULLSCREEN_DESKTOP
+		1280, // Anchura de imagen
+		720, // Altura de imagen
+		SDL_WINDOW_OPENGL
 	);
 
 	//Creación Renderer
 
-	SDL_Renderer *renderer; //Declaramos nuestro renderer	
+	SDL_Renderer *renderer; 	
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 	
 	//Creación rectángulos
@@ -46,15 +47,15 @@ int main(int argc, char*argv[]) {
 
 	dstrect.x = 190;
 	dstrect.y = 110;
-	dstrect.w = 180;
-	dstrect.h = 110;		
+	dstrect.w = 150;
+	dstrect.h = 180;		
 
 	SDL_Rect dbala;
 
-	dbala.x = -60;
-	dbala.y = -20;
-	dbala.w = 60;
-	dbala.h = 20;
+	dbala.x = -100;
+	dbala.y = -100;
+	dbala.w = 200;
+	dbala.h = 100;
 
 	//Declaración evento y variables
 
@@ -68,13 +69,27 @@ int main(int argc, char*argv[]) {
 	bool bala = false;
 	bool shoot = false;
 	
-	Mix_Chunk *musica;
-	musica= Mix_LoadWAV("musica.WAV");	
+	Mix_Chunk *spit;
+	spit= Mix_LoadWAV("spit.WAV");	
 
+	Mix_Music *music;
+	music = Mix_LoadMUS("music.WAV");
+
+	SDL_Surface *sbackground = IMG_Load("background.png");
+	SDL_Texture *tbackground = SDL_CreateTextureFromSurface(renderer, sbackground);
+
+	SDL_Surface *sllama = IMG_Load("llama.png");
+	SDL_Texture *tllama = SDL_CreateTextureFromSurface(renderer, sllama);
+
+	SDL_Surface *sbala = IMG_Load("bala.png");
+	SDL_Texture *tbala = SDL_CreateTextureFromSurface(renderer, sbala);
+
+
+	Mix_PlayMusic(music,  - 1);
 
 	while (run==true) {		
 		
-		//INPUT 
+		//INPUT 		
 
 		while (SDL_PollEvent(&event)) {
 
@@ -91,7 +106,11 @@ int main(int argc, char*argv[]) {
 				case SDLK_UP:;  key_up = true; break;
 				case SDLK_DOWN:;  key_down = true; break;
 				case SDLK_ESCAPE: run = false; break;
-				case SDLK_SPACE: bala = true; break;
+				case SDLK_SPACE:
+					Mix_PlayChannel(-1, spit, 0);
+					dbala.x = (dstrect.x + dstrect.w / 2) - 40;
+					dbala.y = (dstrect.y + dstrect.h / 2) - 80;
+					 break;
 				default: break;
 				}
 				break;
@@ -103,8 +122,7 @@ int main(int argc, char*argv[]) {
 				case SDLK_RIGHT: key_right = false; break;
 				case SDLK_UP:; key_up = false; break;
 				case SDLK_DOWN:; key_down = false; break;
-				case SDLK_ESCAPE: run = false; break;
-				case SDLK_SPACE: bala = false; break;
+				case SDLK_ESCAPE: run = false; break;				
 				default: break;
 				}
 				
@@ -112,8 +130,12 @@ int main(int argc, char*argv[]) {
 			}							
 			
 		}			
-
+		
 		//LOGICA			
+		if (dstrect.x < 0) dstrect.x = 0; 
+		if (dstrect.y < 0) dstrect.y = 0;
+		if (dstrect.x > (1280-dstrect.w)) dstrect.x = (1280 - dstrect.w);
+		if (dstrect.y > (720 - dstrect.h)) dstrect.y = (720 - dstrect.h);
 
 		if (key_right) {
 			dstrect.x += 10;
@@ -127,28 +149,17 @@ int main(int argc, char*argv[]) {
 		if (key_left) {
 			dstrect.x -= 10;
 		}
-		if (bala) {
-			Mix_PlayChannel(-1, musica, 0);
-			dbala.x = dstrect.x + dstrect.w /2;
-			dbala.y = dstrect.y +dstrect.h /2;
-			shoot = true;
-		}
-		if (shoot) {
-			
-			dbala.x += 50;
-		}
+		dbala.x += 50;
 
 		//PAINT
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); 
-		SDL_RenderClear(renderer); 	
-
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); 
-		SDL_RenderFillRect(renderer, &dstrect); 
-
 		
-		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0);
-		SDL_RenderFillRect(renderer, &dbala);
+		SDL_RenderCopy(renderer, tbackground, NULL, NULL);
+		
+		SDL_RenderCopy(renderer, tllama, NULL, &dstrect);
+
+		SDL_RenderCopy(renderer, tbala, NULL, &dbala);	
+		
+	
 		SDL_RenderPresent(renderer);
 	}
 
@@ -156,7 +167,11 @@ int main(int argc, char*argv[]) {
 
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	
+	SDL_DestroyTexture(tbackground);	
+	SDL_DestroyTexture(tbackground);
+	Mix_FreeChunk(spit);
+	Mix_FreeMusic(music);
+		
 
 	SDL_Quit();
 	IMG_Quit();
